@@ -1,0 +1,13 @@
+page boutique
+header1
+header2
+cors allow
+page produit
+page recherche
+min heign 100vh pour toute les pages
+page inscription1
+page inscription2
+page connexion
+page infouser
+page modifinfouser
+page panier

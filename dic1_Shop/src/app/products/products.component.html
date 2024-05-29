@@ -1,0 +1,31 @@
+<app-header1></app-header1>
+<div class="flex-container">
+  <section class="categories">
+    <h2>Catégories de produits</h2>
+    <ul>
+      <label>
+        <input type="radio" name="categorie" class="checkbox-round" checked value="tous" (change)="onCategoryChange($event)"> tous les produits
+      </label>
+      <label *ngFor="let category of categories">
+        <input type="radio" name="categorie" class="checkbox-round" [value]="category.nom_categorie" (change)="onCategoryChange($event)"> {{ category.nom_categorie }}
+      </label>
+      <br>
+    </ul>
+  </section>
+  <section class="produits align-right">
+    <div class="container">
+      <div *ngFor="let product of products" [ngClass]="{'col-md-3': true, 'produit': true}" [style.display]="isProductVisible(product.categorie) ? 'block' : 'none'">
+      <a [routerLink]="['/products/'+product.id]">
+        <img [src]="product.image" alt="{{ product.modele }}" class="images_articles">
+        <p class="achat">{{ product.modele }}</p>
+        <p class="prix">{{ product.prix }}$</p>
+        <div class="stars">
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            <img *ngIf="i < product.etoile" src="../assets/image/star-solid.svg" alt="" class="étoiles">
+          </ng-container>
+        </div>
+      </a>
+      </div>
+    </div>
+  </section>
+</div>

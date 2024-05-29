@@ -1,0 +1,34 @@
+<nav>
+    <div id="nav_top">
+        <p>Bienvenue dans la boutique de commerce électronique en ligne DIC1 shop. </p>
+        <div id="nav_top_right">
+            <div>
+                <span>Suivez nous:</span>
+                <img src="assets/image/social.png" alt="social" class="social">
+            </div> 
+            <div class="hr"></div>
+            <div id="selection">
+                <select name="lang" id="lang">
+                    <option value="fra">fra</option>
+                    <option value="eng">eng</option>
+                </select>               
+                <select name="devise" id="devise">
+                    <option value="USD">USD</option>
+                    <option value="FRANC">Francs Cfa</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="nav_bottom">
+        <div class="icone">
+            <a [routerLink]="['/products']" routerLinkActive="router-link-active" >
+                <img src="assets/image/logo.png" alt="">
+                <span>BOUTIQUE DIC1</span>
+            </a>
+        </div>
+        <div>
+            <img src="../../assets/image/achat.svg" alt="">
+            <a href="{% url 'info_compte' %}"><img src="../../assets/image/user.svg" alt=""></a>
+        </div>
+    </div>
+</nav>
