@@ -23,6 +23,8 @@ urlpatterns = [
     path("rest-auth/", include("rest_framework.urls")),
     path("produits/", api.ProduitsView.as_view(), name="produit-list-create"),
     path("categories/", api.CategorieView.as_view(), name="categorie-list-create"),
+    path("rest-auth/", include('rest_auth.urls')),
+    path("rest-auth/registration/", include('rest_auth.registration.urls')),
     path("admin/", admin.site.urls),    
     path("", admin.site.urls),    
 
