@@ -1,0 +1,47 @@
+<!-- src/app/inscription2/inscription2.component.html -->
+<app-header1></app-header1>
+<div class="header_bottom">
+  <div class="center">
+    <span><img src="assets/image/home.svg" alt=""></span>
+    <span><a routerLink="/">acceuil</a></span>
+    <span>></span>
+    <span class="page">inscription2</span>
+  </div>
+</div>
+
+<div class="corps inscription">
+  <div class="log">
+    <div class="head">
+      <div><a routerLink="/connexion">Connexion</a></div>
+      <div class="active">Inscription</div>
+    </div>
+    <div class="form">
+      <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+        <label for="password">Mot de passe</label>
+        <input formControlName="password" id="password" type="password" />
+        <div *ngIf="password && password.invalid && password.touched">
+          <small *ngIf="password.hasError('required')">Mot de passe est requis</small>
+          <small *ngIf="password.hasError('minlength')">Le mot de passe doit contenir au moins 8 caractères</small>
+        </div>
+        <div *ngIf="errors.password1">
+          <small *ngFor="let error of errors.password1">{{ error }}</small>
+        </div>
+
+        <label for="confirmPassword">Confirmation du mot de passe</label>
+        <input formControlName="confirmPassword" id="confirmPassword" type="password" />
+        <div *ngIf="confirmPassword && confirmPassword.invalid && confirmPassword.touched">
+          <small *ngIf="confirmPassword.hasError('required')">Confirmation du mot de passe est requise</small>
+        </div>
+        <div *ngIf="errors.confirmPassword">
+          <small *ngFor="let error of errors.confirmPassword">{{ error }}</small>
+        </div>
+
+        <div *ngIf="errors.non_field_errors">
+          <small *ngFor="let error of errors.non_field_errors">{{ error }}</small>
+        </div>
+
+        <button class="valider" type="submit" [disabled]="inscriptionForm.invalid">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>

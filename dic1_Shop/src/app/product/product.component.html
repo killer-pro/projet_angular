@@ -1,4 +1,16 @@
 <app-header1></app-header1>
+<div class="header_bottom">
+  <div class="center">
+    <span><img src="assets/image/home.svg" alt=""></span>
+    <span><a routerLink="/">acceuil</a></span>
+    <span>></span>
+    <span class="page">produit</span>
+    <div *ngIf="produit">
+      <span>></span>
+      <span class="page">{{produit.id}}</span>
+    </div>
+  </div>
+</div>
   <div class="contenant" *ngIf="produit">
     <div class="parties">
       <div class="div-image">

@@ -24,6 +24,8 @@ class MyUser(AbstractUser):
     email = models.EmailField(unique=True)
     email2 = models.EmailField(max_length=100, null=True, unique=True)
     telephone = models.CharField(max_length=50, null=True, validators=[validate_senegalease_phone_number])
+    prenom = models.CharField(max_length=200, null=True)
+    nom = models.CharField(max_length=200, null=True)
     addresse = models.CharField(max_length=200, null=True)
     date_naissance = models.DateField(null=True)
     pays = models.CharField(max_length=200, null=True)
@@ -39,7 +41,7 @@ class MyUser(AbstractUser):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = [email]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

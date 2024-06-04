@@ -1,0 +1,56 @@
+<!-- src/app/inscription1/inscription1.component.html -->
+<app-header1></app-header1>
+<div class="header_bottom">
+  <div class="center">
+    <span><img src="assets/image/home.svg" alt=""></span>
+    <span><a routerLink="/">acceuil</a></span>
+    <span>></span>
+    <span class="page">inscription1</span>
+  </div>
+</div>
+
+<div class="corps inscription">
+  <div class="log">
+    <div class="head">
+      <div ><a routerLink="/connexion">Connexion</a></div>
+      <div class="active">Inscription</div>
+    </div>
+    <div class="form">
+      <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+
+        <label for="username">Nom d'utilisateur</label>
+        <input formControlName="username" id="username" type="text" />
+        <div *ngIf="prenom && prenom.invalid && prenom.touched">
+          <small *ngIf="prenom.hasError('required')">le nom d'utilisateur est requis</small>
+        </div>
+
+        <label for="prenom">Prénom</label>
+        <input formControlName="prenom" id="prenom" type="text" />
+        <div *ngIf="prenom && prenom.invalid && prenom.touched">
+          <small *ngIf="prenom.hasError('required')">Prénom est requis</small>
+        </div>
+
+        <label for="nom">Nom</label>
+        <input formControlName="nom" id="nom" type="text" />
+        <div *ngIf="nom && nom.invalid && nom.touched">
+          <small *ngIf="nom.hasError('required')">Nom est requis</small>
+        </div>
+
+        <label for="date_naissance">Date de naissance</label>
+        <input formControlName="date_naissance" id="date_naissance" type="date" />
+        <div *ngIf="date_naissance && date_naissance.invalid && date_naissance.touched">
+          <small *ngIf="date_naissance.hasError('required')">Date de naissance est requise</small>
+        </div>
+
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" type="email" />
+        <div *ngIf="email && email.invalid && email.touched">
+          <small *ngIf="email.hasError('required')">Email est requis</small>
+          <small *ngIf="email.hasError('email')">Format d'email invalide</small>
+        </div>
+
+        <button class="valider" type="submit" [disabled]="inscriptionForm.invalid">Suivant</button>
+      </form>
+    </div>
+  </div>
+</div>

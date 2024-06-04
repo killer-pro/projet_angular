@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService,Produit } from '../product.service';
 import { Header1Component } from '../header1/header1.component';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule,Header1Component,HttpClientModule],
+  imports: [CommonModule,Header1Component,HttpClientModule,RouterLink],
   providers:[ProductService],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
