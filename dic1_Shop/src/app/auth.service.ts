@@ -12,10 +12,10 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/rest-auth/login/`, { email, password }).pipe(
+    return this.http.post(`${this.apiUrl}/login/`, { email, password }).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
-        console.log(response);
+        // console.log(response);
         
       })
     );
@@ -45,6 +45,8 @@ export class AuthService {
 
   getUser(): Observable<any> {
     const headers = this.getHeaders();
+    console.log(headers);
+    
     return this.http.get(`${this.apiUrl}/user/`, { headers });
   }
 }

@@ -18,3 +18,27 @@ class UserSerializer(serializers.ModelSerializer):
         model = MyUser
         fields = ['id', 'password',"username", 'email','prenom','nom', 'date_naissance']
         extra_kwargs = {'password': {'write_only': True}}
+
+class UserFUllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = [    
+            "username",
+            "first_name",
+            "last_name",
+            "date_joined",
+            "profile",
+            "email",
+            "email2",
+            "telephone",
+            "prenom",
+            "nom",
+            "addresse",
+            "date_naissance",
+            "pays",
+            "region",
+            "code_postale",
+            "commande_attente",
+            "commande_terminer",
+            "panier",]
+        extra_kwargs = {'password': {'write_only': True}}

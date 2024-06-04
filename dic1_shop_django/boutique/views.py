@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-from .serializer import UserSerializer
+from .serializer import UserSerializer, UserFUllSerializer
 from .models import MyUser
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import permission_classes
@@ -42,3 +42,11 @@ def test_token(request):
 def logout(request):
     request.user.auth_token.delete()
     return Response(status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user(request):
+    user = request.user
+    print(user)
+    serializer = UserFUllSerializer(user)
+    return Response(serializer.data)

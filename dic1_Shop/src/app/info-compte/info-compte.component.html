@@ -1,0 +1,48 @@
+<app-header1></app-header1>
+<div class="corps info_compte">
+    <div class="box1 box">
+      <div class="head">
+        <h3>INFO COMPTE</h3>
+      </div>
+      <div class='content1'>
+        <div class='nom_ville'>
+          <div class="profile1">
+            <!-- <img [src]="user.profile" alt="pp" *ngIf="user.profile"> -->
+            <img src="assets\image\Image_1.png" >
+          </div>
+          <div>
+            <p class='bold'>{{user.prenom}} {{user.nom}}</p>
+            <p>{{user.region}} {{user.pays}}</p>
+          </div>
+        </div>
+        <p><span class='bold'>E-mail:</span> {{user.email}}</p>
+        <p><span class='bold'>numéro de téléphone:</span> {{user.telephone}}</p>
+        <p><span class='bold'>addresse:</span> {{user.addresse}}</p>
+        <a [routerLink]="['/param-compte']">MODIFIER LE COMPTE</a>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box21 box3">
+        <img src="assets/image/fusee.svg" alt="">
+        <div>
+          <p>{{ (user.commande_attente) + (user.commande_terminer) }}</p>
+          <p>commande totales</p>
+        </div>
+      </div>
+      <div class="box22 box3">
+        <img src="assets/image/paper.svg" alt="">
+        <div>
+          <p>{{user.commande_attente}}</p>
+          <p>commande en attentes</p>
+        </div>
+      </div>
+      <div class="box23 box3">
+        <img src="assets/image/box.svg" alt="">
+        <div>
+          <p>{{user.commande_terminer}}</p>
+          <p>commande terminées</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

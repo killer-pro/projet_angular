@@ -13,10 +13,10 @@ urlpatterns = [
     path('rest-auth/logout/', LogoutView.as_view(), name='rest_logout'),
     # path('rest-auth/', include('dj_rest_auth.urls')),  # Inclus les URLs de base de dj-rest-auth
     # path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),  # Inclus les URLs d'enregistrement de dj-rest-auth
-
-    path('login',views.login),
-    path('signup',views.signup),
-    path('test_token',views.test_token),
+    path('user/', views.get_user, name='get_user'),  
+    path('login/',views.login),
+    path('signup/',views.signup),
+    path('test_token/',views.test_token),
     path("admin/", admin.site.urls),    
 
 ]
