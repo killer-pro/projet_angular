@@ -1,0 +1,130 @@
+<app-header2></app-header2>
+<div class="corp">
+      <a class="disconnect" [routerLink]="['/connexion']" routerLinkActive="router-link-active"  (click)="logout()">Déconnexion</a>
+    <div class="param">
+      <div class="head">Paramètre du compte</div>
+      <div class="form2">
+        <div class="left">
+          <div class="profile">
+            <img [src]="profileImage" alt="pp">
+            <div class="form_image">
+              <input type="file" (change)="onFileChange($event)" />
+            </div>
+          </div>
+        </div>
+        <div class="form form21">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmitUserForm()">
+            <div class="form-group1">
+              <div class="form-group-12">
+                <div class="form-group-121">
+                  <label for="first_name">Prénom:</label><br>
+                  <input formControlName="first_name" id="first_name" />
+                  <div *ngIf="userForm.get('first_name')?.invalid && userForm.get('first_name')?.touched">
+                    <div class="error-message">Prénom est requis</div>
+                  </div>
+                </div>
+                <div class="form-group-121">
+                  <label for="last_name">Nom:</label><br>
+                  <input formControlName="last_name" id="last_name" />
+                  <div *ngIf="userForm.get('last_name')?.invalid && userForm.get('last_name')?.touched">
+                    <div class="error-message">Nom est requis</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email2">Email secondaire:</label><br>
+                  <input formControlName="email2" id="email2" />
+                  <div *ngIf="userForm.get('email2')?.invalid && userForm.get('email2')?.touched">
+                    <div class="error-message">Email secondaire invalide</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group-12">
+                <div class="form-group">
+                  <label for="email">Email:</label><br>
+                  <input formControlName="email" id="email" />
+                  <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                    <div class="error-message">Email est requis</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="telephone">Téléphone:</label><br>
+                  <input formControlName="telephone" id="telephone" />
+                  <div *ngIf="userForm.get('telephone')?.invalid && userForm.get('telephone')?.touched">
+                    <div class="error-message">Téléphone est requis</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="addresse">Adresse:</label><br>
+              <input formControlName="addresse" id="addresse" />
+              <div *ngIf="userForm.get('addresse')?.invalid && userForm.get('addresse')?.touched">
+                <div class="error-message">Adresse est requise</div>
+              </div>
+            </div>
+            <div class="form-group1">
+              <div class="form-group-3">
+                <label for="pays">Pays:</label><br>
+                <input formControlName="pays" id="pays" />
+                <div *ngIf="userForm.get('pays')?.invalid && userForm.get('pays')?.touched">
+                  <div class="error-message">Pays est requis</div>
+                </div>
+              </div>
+  
+              <div class="form-group-3">
+                <label for="region">Région:</label><br>
+                <input formControlName="region" id="region" />
+                <div *ngIf="userForm.get('region')?.invalid && userForm.get('region')?.touched">
+                  <div class="error-message">Région est requise</div>
+                </div>
+              </div>
+  
+              <div class="form-group-3">
+                <label for="code_postale">Code postal:</label><br>
+                <input formControlName="code_postale" id="code_postale" />
+                <div *ngIf="userForm.get('code_postale')?.invalid && userForm.get('code_postale')?.touched">
+                  <div class="error-message">Code postal est requis</div>
+                </div>
+              </div>
+            </div>
+  
+            <button class="valider" type="submit" [disabled]="userForm.invalid">Valider</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="param">
+      <div class="head">Changer le mot de passe</div>
+      <div class="form">
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmitPasswordForm()">
+          <div class="form-group">
+            <label for="previous_password">Mot de passe précédent :</label><br>
+            <input formControlName="previous_password" id="previous_password" type="password" />
+            <div *ngIf="passwordForm.get('previous_password')?.invalid && passwordForm.get('previous_password')?.touched">
+              <div class="error-message">Mot de passe précédent est requis</div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="new_password">Nouveau mot de passe :</label><br>
+            <input formControlName="new_password" id="new_password" type="password" />
+            <div *ngIf="passwordForm.get('new_password')?.invalid && passwordForm.get('new_password')?.touched">
+              <div class="error-message">Nouveau mot de passe est requis</div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="confirm_password">Confirmer le nouveau mot de passe :</label><br>
+            <input formControlName="confirm_password" id="confirm_password" type="password" />
+            <div *ngIf="passwordForm.get('confirm_password')?.invalid && passwordForm.get('confirm_password')?.touched">
+              <div class="error-message">Confirmation du mot de passe est requise</div>
+            </div>
+          </div>
+  
+          <button class="valider" type="submit" [disabled]="passwordForm.invalid">Valider</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

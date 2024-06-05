@@ -20,7 +20,7 @@ class MyUserManager(BaseUserManager):
 
 # Modèle utilisateur personnalisé
 class MyUser(AbstractUser):
-    profile = models.ImageField(upload_to='static/assets/profile/', null=True, default='assets/image/image_1.png')
+    profile = models.ImageField(upload_to='static/assets/profile/', null=True, default='assets/image/Image_1.png')
     email = models.EmailField(unique=True)
     email2 = models.EmailField(max_length=100, null=True, unique=True)
     telephone = models.CharField(max_length=50, null=True, validators=[validate_senegalease_phone_number])

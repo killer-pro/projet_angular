@@ -2,3 +2,5 @@ POST http://127.0.0.1:8000/signup
 Content-Type: application/json
 
 {"username" : "azddddnecd","password": "Pass1234!", "email": "qadaddm6@mail.com" ,"prenom": "adam1","nom":"smith1","date_naissance":"2002-01-01"}
+
+

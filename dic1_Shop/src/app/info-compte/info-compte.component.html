@@ -1,4 +1,4 @@
-<app-header1></app-header1>
+<app-header2></app-header2>
 <div class="corps info_compte">
     <div class="box1 box">
       <div class="head">
@@ -7,18 +7,18 @@
       <div class='content1'>
         <div class='nom_ville'>
           <div class="profile1">
-            <!-- <img [src]="user.profile" alt="pp" *ngIf="user.profile"> -->
-            <img src="assets\image\Image_1.png" >
+            <img [src]="user.profile" alt="pp" *ngIf="user.profile">
+            <!-- <img src="assets\image\Image_1.png" > -->
           </div>
           <div>
-            <p class='bold'>{{user.prenom}} {{user.nom}}</p>
+            <p class='bold'>{{user.first_name}} {{user.last_name}}</p>
             <p>{{user.region}} {{user.pays}}</p>
           </div>
         </div>
         <p><span class='bold'>E-mail:</span> {{user.email}}</p>
         <p><span class='bold'>numéro de téléphone:</span> {{user.telephone}}</p>
         <p><span class='bold'>addresse:</span> {{user.addresse}}</p>
-        <a [routerLink]="['/param-compte']">MODIFIER LE COMPTE</a>
+        <a [routerLink]="['/param_compte']">MODIFIER LE COMPTE</a>
       </div>
     </div>
     <div class="box">

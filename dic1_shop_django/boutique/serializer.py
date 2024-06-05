@@ -19,20 +19,20 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'password',"username", 'email','prenom','nom', 'date_naissance']
         extra_kwargs = {'password': {'write_only': True}}
 
-class UserFUllSerializer(serializers.ModelSerializer):
+from rest_framework import serializers
+from .models import MyUser
+
+class UserFullSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
-        fields = [    
+        fields = [
             "username",
             "first_name",
             "last_name",
-            "date_joined",
             "profile",
             "email",
             "email2",
             "telephone",
-            "prenom",
-            "nom",
             "addresse",
             "date_naissance",
             "pays",
@@ -40,5 +40,6 @@ class UserFUllSerializer(serializers.ModelSerializer):
             "code_postale",
             "commande_attente",
             "commande_terminer",
-            "panier",]
-        extra_kwargs = {'password': {'write_only': True}}
+            "panier",
+        ]
+        extra_kwargs = {field: {'required': False} for field in fields}

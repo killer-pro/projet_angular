@@ -24,7 +24,7 @@ export class AuthService {
   logout(): Observable<any> {
     const headers = this.getHeaders();
     localStorage.removeItem('token');
-    return this.http.post(`${this.apiUrl}/logout/`, {}, { headers });
+    return this.http.post(`${this.apiUrl}/logout`, {}, { headers });
   }
 
   register(user: any): Observable<any> {
@@ -45,8 +45,23 @@ export class AuthService {
 
   getUser(): Observable<any> {
     const headers = this.getHeaders();
-    console.log(headers);
-    
+    // console.log(headers);
     return this.http.get(`${this.apiUrl}/user/`, { headers });
   }
+
+  updateUser(user: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.put(`${this.apiUrl}/update/`, user, {headers
+      // headers: new HttpHeaders({
+      //   'Content-Type': 'application/json'
+      // })
+    });
+  }
+
+  changePassword(data: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post(`${this.apiUrl}/change-password/`, data,{headers});
+  }
+
 }
+

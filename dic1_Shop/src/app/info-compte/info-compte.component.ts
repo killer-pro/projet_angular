@@ -2,13 +2,13 @@ import { Component,OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Header1Component } from '../header1/header1.component';
+import { Header2Component } from '../header2/header2.component';
 
 @Component({
   selector: 'app-info-compte',
   standalone: true,
   providers: [AuthService],
-  imports: [RouterLink,CommonModule,Header1Component],
+  imports: [RouterLink,CommonModule,Header2Component],
   templateUrl: './info-compte.component.html',
   styleUrl: './info-compte.component.css'
 })

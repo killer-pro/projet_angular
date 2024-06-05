@@ -27,8 +27,8 @@
             </a>
         </div>
         <div>
-            <img src="../../assets/image/achat.svg" alt="">
-            <a href="{% url 'info_compte' %}"><img src="../../assets/image/user.svg" alt=""></a>
+            <a [routerLink]="['/panier']" routerLinkActive="router-link-active"><img src="../../assets/image/achat.svg" alt=""></a>
+            <a [routerLink]="['/info_compte']" routerLinkActive="router-link-active"><img src="../../assets/image/user.svg" alt=""></a>
         </div>
     </div>
 </nav>

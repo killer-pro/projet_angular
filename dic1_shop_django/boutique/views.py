@@ -1,12 +1,14 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-from .serializer import UserSerializer, UserFUllSerializer
+from .serializer import UserSerializer, UserFullSerializer
 from .models import MyUser
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.decorators import permission_classes
+from django.contrib.auth.hashers import check_password
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -39,14 +41,45 @@ def test_token(request):
     return Response({'message': 'Token is valid'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def logout(request):
     request.user.auth_token.delete()
     return Response(status=status.HTTP_200_OK)
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'PATCH'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def get_user(request):
     user = request.user
-    print(user)
-    serializer = UserFUllSerializer(user)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = UserFullSerializer(user)
+        return Response(serializer.data)
+    elif request.method in ['PUT', 'PATCH']:
+        serializer = UserFullSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def change_password(request):
+    user = request.user
+    data = request.data
+    if not check_password(data['previous_password'], user.password):
+        return Response({'error': 'Incorrect previous password'}, status=status.HTTP_400_BAD_REQUEST)
+    if data['new_password'] != data['confirm_password']:
+        return Response({'error': 'New passwords do not match'}, status=status.HTTP_400_BAD_REQUEST)
+    user.set_password(data['new_password'])
+    user.save()
+    return Response({'message': 'Password changed successfully'}, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_user(request):
+    user = request.user
+    serializer = UserFullSerializer(user, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
