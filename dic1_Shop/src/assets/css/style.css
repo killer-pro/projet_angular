@@ -721,6 +721,8 @@ body{
     display: flex;
     flex-direction: column;
     text-align: center;
+    flex: 1;
+    justify-content: center;
 
 }
 .valid >div{
@@ -828,7 +830,7 @@ td{
 }
 .produit_info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -851,8 +853,7 @@ td{
 .modele {
     vertical-align: middle;
 }
-.nb_produit2 {
-}
+
 .nb_produit2 div{
     display: flex;
     border: 1px solid #F2F4F5;

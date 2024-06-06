@@ -1,12 +1,19 @@
 from rest_framework import serializers
-from .models import Produit,Categorie
+from .models import Produit,Categorie,Articles
 from boutique.models import MyUser
 
 class ProduitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produit
         fields = '__all__'
-        
+
+class ArticlesSerializer(serializers.ModelSerializer):
+    article = ProduitSerializer()
+
+    class Meta:
+        model = Articles
+        fields = ['article', 'nombre']
+
 class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorie

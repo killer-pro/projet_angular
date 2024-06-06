@@ -1,0 +1,19 @@
+<td>
+    <div class="produit_info">
+      <a (click)="onDelete()">
+        <img src="assets/image/circle-xmark-regular.svg" alt="" class="xmark" id="cart">
+      </a>
+      <img [src]="item.article.image" [alt]="item.article.modele" class="produit_acheté">
+      <span class="modele">{{ item.article.modele }}</span>
+    </div>
+  </td>
+  <td>{{ item.article.prix }}$</td>
+  <td class='nb_produit2'>
+    <div>
+      <button class="plus" (click)="increaseQuantity()">+</button>
+      <input type="number" class="panier_nombre" name="nombre" [value]="item.nombre">
+      <button class="moins" (click)="decreaseQuantity()">-</button>
+    </div>
+  </td>
+  <td class="total-column">{{ item.article.prix * item.nombre }}$</td>
+  

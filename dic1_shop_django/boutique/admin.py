@@ -8,7 +8,7 @@ class MyUserAdmin(UserAdmin):
     list_filter = ('is_staff', 'is_active', 'groups')
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        ('Personal Info', {'fields': ('first_name', 'last_name', 'profile', 'email2', 'telephone', 'addresse', 'date_naissance', 'pays', 'region', 'code_postale')}),
+        ('Personal Info', {'fields': ('first_name', 'last_name', 'profile', 'email2', 'telephone', 'addresse', 'date_naissance', 'pays', 'region', 'code_postale','commande_attente','commande_terminer','panier')}),
         ('Permissions', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )

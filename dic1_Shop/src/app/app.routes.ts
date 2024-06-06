@@ -7,6 +7,8 @@ import { Iscription1Component } from './iscription1/iscription1.component';
 import { Iscription2Component } from './iscription2/iscription2.component';
 import { InfoCompteComponent } from './info-compte/info-compte.component';
 import { ParamCompteComponent } from './param-compte/param-compte.component';
+import { PanierComponent } from './panier/panier.component';
+import { ValidationComponent } from './validation/validation.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -17,6 +19,8 @@ export const routes: Routes = [
   { path: 'inscription2', component: Iscription2Component },
   { path: 'info_compte', component: InfoCompteComponent },
   { path: 'param_compte', component: ParamCompteComponent },
+  { path: 'panier', component: PanierComponent },
+  { path: 'validation', component: ValidationComponent },
 ];
 
 @NgModule({

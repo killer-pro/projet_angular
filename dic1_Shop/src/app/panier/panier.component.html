@@ -1,0 +1,85 @@
+<app-header2></app-header2>
+<div class="parties2">
+  <section class="liste_produits">
+    <h5 id="title">Panier</h5>
+    <table id="panier-table">
+      <thead>
+        <tr>
+          <th class="intitulés">PRODUIT</th>
+          <th class="intitulés">PRIX</th>
+          <th class="intitulés">QUANTITÉ</th>
+          <th class="intitulés">TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of panierItems" class="articles">
+          <td>
+            <div class="produit_info">
+              <a (click)="deleteItem(item.article.id)">
+                <img src="../../assets/image/circle-xmark-regular.svg" alt="" class="xmark" >
+              </a>
+              <img src="{{ item.article.image }}" alt="" class="produit_acheté">
+                <h5 class="modele">{{ item.article.modele }}</h5>
+            </div>
+          </td>
+          <td>{{ item.article.prix }}$</td>
+
+
+          <td class="nb_produit2">
+            <div>
+              <button class="moins" (click)="decrementQuantity(item)">-</button>
+              <input
+                type="number"
+                class="panier_nombre"
+                [(ngModel)]="item.nombre"
+                (change)="onQuantityChange()"
+                min="1"
+              />
+              <button class="plus" (click)="incrementQuantity(item)">+</button>
+            </div>
+          </td>
+
+
+          <td>{{ item.article.prix * item.nombre }}$</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="separateur3">
+    <div class="btns">
+      <a class="btn_panier" [routerLink]="['/products']" routerLinkActive="router-link-active" >
+        <img src="assets/image/arrow-left-solid blue.svg" alt="" id="cart_arrow"> &nbsp; ACCUEIL
+      </a>
+      <a class="btn_panier" [routerLink]="['/validation']" routerLinkActive="router-link-active">VALIDER</a>
+    </div>
+  </section>
+  <section class="total">
+    <p id="title">Totaux</p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="label">Total</td>
+          <td>{{ subtotal }}$</td>
+        </tr>
+        <tr>
+          <td class="label">Frais</td>
+          <td>{{ frais }}$</td>
+        </tr>
+        <tr>
+          <td class="label">Réduction</td>
+          <td>{{ reduction }}$</td>
+        </tr>
+        <tr>
+          <td class="label">Taxe</td>
+          <td>{{ taxe }}$</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="separateur4"></td>
+        </tr>
+        <tr>
+          <td class="label">Prix final</td>
+          <td>{{ finalTotal }}$</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
