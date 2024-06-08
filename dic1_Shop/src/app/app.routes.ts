@@ -9,6 +9,7 @@ import { InfoCompteComponent } from './info-compte/info-compte.component';
 import { ParamCompteComponent } from './param-compte/param-compte.component';
 import { PanierComponent } from './panier/panier.component';
 import { ValidationComponent } from './validation/validation.component';
+import { RechercheComponent } from './recherche/recherche.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -21,6 +22,8 @@ export const routes: Routes = [
   { path: 'param_compte', component: ParamCompteComponent },
   { path: 'panier', component: PanierComponent },
   { path: 'validation', component: ValidationComponent },
+  { path: 'recherche/:search', component: RechercheComponent },
+
 ];
 
 @NgModule({

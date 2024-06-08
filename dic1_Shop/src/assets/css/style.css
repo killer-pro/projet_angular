@@ -657,24 +657,6 @@ body{
 
 }
 
-.cat2{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 250px;
-    border: 1px solid black;
-    background-color: rgb(255, 102, 0);
-    align-content: center;
-    text-align: center;
-    color: white;
-    padding: 5px;
-    flex: 1;
-    margin: 0 10px;
-
-}
-.cat2 p{
-    margin: 0;
-}
 .quantite input{
     flex: 1;
     border: none;

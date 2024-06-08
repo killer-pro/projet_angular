@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
-from rest_framework import status,viewsets
+from rest_framework import status,viewsets,generics
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
@@ -9,6 +9,7 @@ from .serializer import UserSerializer, UserFullSerializer,ArticlesSerializer
 from .models import MyUser,Articles
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth.hashers import check_password
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -85,12 +86,43 @@ def update_user(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 # panier
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_panier(request):
-    user = request.user
-    panier_items = Articles.objects.filter(client=user)
-    serializer = ArticlesSerializer(panier_items, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def get_panier(request):
+#     user = request.user
+#     panier_items = Articles.objects.filter(client=user)
+#     serializer = ArticlesSerializer(panier_items, many=True)
+#     return Response(serializer.data)
+
+class PanierListCreateView(generics.ListCreateAPIView):
+    serializer_class = ArticlesSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Articles.objects.filter(client=self.request.user)
+
+    def perform_create(self, serializer):
+        # Récupérer les données de l'article à ajouter
+        article_data = serializer.validated_data
+
+        # Vérifier si l'article est déjà présent dans le panier de l'utilisateur
+        existing_article = Articles.objects.filter(client=self.request.user, article=article_data['article']).first()
+
+        if existing_article:
+            # Si l'article existe déjà, mettre à jour la quantité en incrémentant le nombre d'articles
+            existing_article.nombre += article_data['nombre']
+            existing_article.save()
+            serializer.instance = existing_article
+        else:
+            # Sinon, ajouter le nouvel article au panier
+            serializer.save(client=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+
+class PanierItemDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Articles.objects.all()
+    serializer_class = ArticlesSerializer
+    permission_classes = [IsAuthenticated]

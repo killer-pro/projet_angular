@@ -7,6 +7,7 @@ urlpatterns = [
     path("produit_item/<int:id>/", api.ProduitView.as_view(), name="produit_item"), 
     path("api-auth/", include("rest_framework.urls")),
     path("produits/", api.ProduitsView.as_view(), name="produit-list-create"),
+
     path("categories/", api.CategorieView.as_view(), name="categorie-list-create"),
     path('rest-auth/login/', LoginView.as_view(), name='rest_login'),
     path('rest-auth/logout/', LogoutView.as_view(), name='rest_logout'),
@@ -18,9 +19,10 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('test_token/', views.test_token, name='test_token'),
     
-    path('panier/', api.PanierView.as_view(), name='get_panier'),
+    path('panier/', views.PanierListCreateView.as_view(), name='panier-list-create'),
+    path('panier/<int:pk>/', views.PanierItemDestroyView.as_view(), name='panier-item-detail-delete'),
 
-
+    path('recherche/<str:search>/', api.RechercheView.as_view(), name='recherche'),
 
     path("admin/", admin.site.urls),
 

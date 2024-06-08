@@ -27,13 +27,14 @@
             </a>
         </div>
         <div class="search-container">
-            <form action="{% url 'recherche' %}" method="get">
-                <input type="text" name="q" placeholder="Rechercher...">
-                <button type="submit" class="icone">
-                    <img  src="../../assets/image/loupe.png" alt="Rechercher">
+            <form [action]="'/recherche/' + searchTerm" method="get">
+                <input type="text" name="q" placeholder="Rechercher..." [(ngModel)]="searchTerm">
+                <button type="submit" class="icone" [routerLink]="'/recherche/' + searchTerm">
+                    <img src="../../assets/image/loupe.png" alt="Rechercher">
                 </button>
             </form>
         </div>
+        
         <div>
             <a [routerLink]="['/panier']" routerLinkActive="router-link-active"><img src="../../assets/image/achat.svg" alt=""></a>
             <a [routerLink]="['/info_compte']" routerLinkActive="router-link-active"><img src="../../assets/image/user.svg" alt=""></a>

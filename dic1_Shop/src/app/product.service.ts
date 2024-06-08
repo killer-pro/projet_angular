@@ -20,7 +20,8 @@ export interface Produit{
 })
 export class ProductService {
   private apiUrl="http://127.0.0.1:8000/produits/"
-  private api_item="http://127.0.0.1:8000/produit_item/"
+  private apiItem="http://127.0.0.1:8000/produit_item/"
+  private searchUrl="http://127.0.0.1:8000/recherche/"
 
 
   constructor(private http:HttpClient) { }
@@ -30,9 +31,12 @@ export class ProductService {
     return this.http.get<Produit[]>(this.apiUrl)
   }
   getProduct(id:number):Observable<Produit>{
-    return this.http.get<Produit>(`${this.api_item}${id}/`)
+    return this.http.get<Produit>(`${this.apiItem}${id}/`)
   }
+  getRecherche(search:string):Observable<Produit[]>{
+    return this.http.get<Produit[]>(`${this.searchUrl}${search}`)
 
+  }
   // getProductByRef(id: string): Observable<Produit> {
   //   const url = ${this.apiUrl}${id}/; 
   //   return this.http.get<Produit>(url);

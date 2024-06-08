@@ -2,6 +2,9 @@ from rest_framework import generics
 from .models import Produit, Categorie,Articles
 from .serializer import ProduitSerializer, CategorieSerializer,ArticlesSerializer
 from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.db.models import Q
 
 class ProduitsView(generics.ListAPIView):
     queryset = Produit.objects.all()
@@ -21,10 +24,34 @@ class CategorieView(generics.ListAPIView):
     serializer_class = CategorieSerializer
     permission_classes=[AllowAny]
 
-class PanierView(generics.ListAPIView):
-    serializer_class = ArticlesSerializer
-    permission_classes = [IsAuthenticated]
+# class PanierView(generics.ListAPIView):
+#     serializer_class = ArticlesSerializer
+#     permission_classes = [IsAuthenticated]
+
+#     def get_queryset(self):
+#         user = self.request.user
+#         return Articles.objects.filter(client=user)
+    
+# class AddToPanierView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request, *args, **kwargs):
+#         serializer = ArticlesSerializer(data=request.data, context={'request': request})
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=201)
+#         return Response(serializer.errors, status=400)
+
+
+
+class RechercheView(generics.ListAPIView):
+    serializer_class = ProduitSerializer
 
     def get_queryset(self):
-        user = self.request.user
-        return Articles.objects.filter(client=user)
+        terme_recherche = self.kwargs['search']
+        return Produit.objects.filter(
+                    Q(modele__icontains=terme_recherche) |
+                    Q(marque__icontains=terme_recherche) |
+                    Q(description__icontains=terme_recherche) |
+                    Q(categorie__icontains=terme_recherche)
+                )

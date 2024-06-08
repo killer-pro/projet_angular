@@ -1,6 +1,7 @@
-from rest_framework import serializers
+from rest_framework import serializers,generics
 from .models import Produit,Categorie,Articles
 from boutique.models import MyUser
+
 
 class ProduitSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,11 +9,14 @@ class ProduitSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ArticlesSerializer(serializers.ModelSerializer):
-    article = ProduitSerializer()
+    article_detail = ProduitSerializer(source='article', read_only=True)
+    article = serializers.PrimaryKeyRelatedField(queryset=Produit.objects.all())
 
     class Meta:
         model = Articles
-        fields = ['article', 'nombre']
+        fields = ['id', 'article', 'article_detail', 'client', 'nombre']
+        extra_kwargs = {'client': {'read_only': True}}
+
 
 class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,9 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = MyUser
         fields = ['id', 'password',"username", 'email','prenom','nom', 'date_naissance']
         extra_kwargs = {'password': {'write_only': True}}
-
-from rest_framework import serializers
-from .models import MyUser
 
 class UserFullSerializer(serializers.ModelSerializer):
     class Meta:
