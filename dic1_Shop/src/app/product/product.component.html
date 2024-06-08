@@ -1,3 +1,4 @@
+<!-- product.component.html -->
 <app-header1></app-header1>
 <div class="header_bottom">
   <div class="center">
@@ -7,59 +8,63 @@
     <span class="page">produit</span>
     <div *ngIf="produit">
       <span>></span>
-      <span class="page">{{produit.id}}</span>
+      <span class="page">{{ produit.id }}</span>
     </div>
   </div>
 </div>
-  <div class="contenant" *ngIf="produit">
-    <div class="parties">
-      <div class="div-image">
-        <img [src]="produit.image" [alt]="produit.modele">
-      </div>
-      <div class="infos">
-        <h3>{{ produit.modele }}</h3>
-        <div class="marque">
-          <p>la Marque : {{ produit.marque }}</p>
-          <p>Catégorie : {{ produit.categorie }}</p>
-        </div>
-        <p class="prix">{{ produit.prix }}$</p>
-        <p class="separateur1"></p>
-        <form class="quantite" method="post">
-          <div class="nb_produit">
-            <button type="button" class="button plus" (click)="incrementQuantity()">+</button>
-            <input type="text" name="nombre" [value]="quantite">
-            <button type="button" class="button moins" (click)="decrementQuantity()">-</button>
-          </div>
-        </form>
-        <p id="share">Partager le produit :
-          <!-- Share icons logic -->
-        </p>
-        <div class="gar">
-          <p>Garantie à 100% Paiement sécurisé</p>
-          <img src="../../assets/image/Payment Method.png" alt="">
-        </div>
-      </div>
+<div class="contenant" *ngIf="produit">
+  <div class="parties">
+    <div class="div-image">
+      <img [src]="produit.image" [alt]="produit.modele">
     </div>
-    <div class="description">
-      <div class="gauche">
-        <h4>Description</h4>
-        <p>{{ produit.description }}</p>
+    <div class="infos">
+      <h3>{{ produit.modele }}</h3>
+      <div class="marque">
+        <p>la Marque : {{ produit.marque }}</p>
+        <p>Catégorie : {{ produit.categorie }}</p>
       </div>
-      <div class="middle">
-        <h4>Fonctionnalité</h4>
-        <p> <img src="../../assets/image/award-solid.svg" alt="" class="cart"> Garantie gratuite d'un an</p>
-        <p> <img src="../../assets/image/truck-solid.svg" alt="" class="cart"> Livraison gratuite et livraison rapide</p>
-        <p> <img src="../../assets/image/handshake-regular.svg" alt="" class="cart"> Garantie de remboursement à 100%</p>
-        <p> <img src="../../assets/image/headphones-solid.svg" alt="" class="cart"> Assistance client 24h/24 et 7j/7</p>
-        <p> <img src="../../assets/image/credit-card-regular.svg" alt="" class="cart"> Mode de paiement sécurisé</p>
-      </div>
-      <p class="separateur2"></p>
-      <div class="droite">
-        <h4>Informations sur la livraison</h4>
-        <p>Courrier: 2 à 4 jours, livraison gratuite</p>
-        <p>Expédition locale: jusqu'à une semaine, 19.00$</p>
-        <p>Expédition terrestre UPS: 4 à 6 jours, 29.00$</p>
-        <p>Exportation mondiale Unishop: 3 à 4 jours, 39.00$</p>
+      <p class="prix">{{ produit.prix }}$</p>
+      <p class="separateur1"></p>
+      <form class="quantite" method="post">
+        <div class="nb_produit">
+          <button type="button" class="button plus" (click)="incrementQuantity()">+</button>
+          <input type="text" name="nombre" [value]="quantite">
+          <button type="button" class="button moins" (click)="decrementQuantity()">-</button>
+          <button type="button" (click)="ajouterAuPanier()" class="cat2">
+            <p>AJOUTER AU PANIER</p>
+            <img src="../../assets/image/cart-shopping-solid.svg" alt="" id="cart">
+          </button>
+        </div>
+      </form>
+      <p id="share">Partager le produit :
+        <!-- Share icons logic -->
+      </p>
+      <div class="gar">
+        <p>Garantie à 100% Paiement sécurisé</p>
+        <img src="../../assets/image/Payment Method.png" alt="">
       </div>
     </div>
   </div>
+  <div class="description">
+    <div class="gauche">
+      <h4>Description</h4>
+      <p>{{ produit.description }}</p>
+    </div>
+    <div class="middle">
+      <h4>Fonctionnalité</h4>
+      <p><img src="../../assets/image/award-solid.svg" alt="" class="cart"> Garantie gratuite d'un an</p>
+      <p><img src="../../assets/image/truck-solid.svg" alt="" class="cart"> Livraison gratuite et livraison rapide</p>
+      <p><img src="../../assets/image/handshake-regular.svg" alt="" class="cart"> Garantie de remboursement à 100%</p>
+      <p><img src="../../assets/image/headphones-solid.svg" alt="" class="cart"> Assistance client 24h/24 et 7j/7</p>
+      <p><img src="../../assets/image/credit-card-regular.svg" alt="" class="cart"> Mode de paiement sécurisé</p>
+    </div>
+    <p class="separateur2"></p>
+    <div class="droite">
+      <h4>Informations sur la livraison</h4>
+      <p>Courrier: 2 à 4 jours, livraison gratuite</p>
+      <p>Expédition locale: jusqu'à une semaine, 19.00$</p>
+      <p>Expédition terrestre UPS: 4 à 6 jours, 29.00$</p>
+      <p>Exportation mondiale Unishop: 3 à 4 jours, 39.00$</p>
+    </div>
+  </div>
+</div>

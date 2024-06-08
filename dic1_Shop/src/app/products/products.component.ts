@@ -3,13 +3,13 @@ import { ProductService } from '../product.service';
 import { CategorieService } from '../categorie.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Header1Component } from '../header1/header1.component';
+import { Header2Component } from '../header2/header2.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, Header1Component,RouterLink],
+  imports: [CommonModule, HttpClientModule, Header2Component,RouterLink],
   templateUrl: './products.component.html',
   providers: [ProductService, CategorieService],
   styleUrls: ['./products.component.css']

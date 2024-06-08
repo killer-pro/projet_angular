@@ -1,21 +1,25 @@
+// panier.service.ts
+
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-export interface Produit {
+export interface ArticleDetail {
+  id: number;
   modele: string;
   marque: string;
   description: string;
-  categorie: string;
   prix: number;
-  quantite: boolean;
+  quantite: number;
   etoile: number;
   image: string;
-  id: number;
 }
 
 export interface Article {
-  article: Produit;
+  id: number;
+  article: number;
+  article_detail: ArticleDetail;
+  client: number;
   nombre: number;
 }
 
@@ -26,6 +30,7 @@ export class PanierService {
   private apiUrl = 'http://127.0.0.1:8000/panier/';
 
   constructor(private http: HttpClient) { }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
@@ -38,13 +43,18 @@ export class PanierService {
     });
   }
 
-  getPanierItems(): Observable<Article[]> {
+  getPanier(): Observable<Article[]> {
     const headers = this.getHeaders();
-    return this.http.get<Article[]>(this.apiUrl,{headers});
+    return this.http.get<Article[]>(this.apiUrl, { headers });
+  }
+
+  addItem(article: { article: number; nombre: number }): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post(this.apiUrl, article, { headers });
   }
 
   deleteItem(articleId: number): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.delete(`${this.apiUrl}${articleId}/`,{headers});
+    return this.http.delete(`${this.apiUrl}${articleId}/`, { headers });
   }
 }

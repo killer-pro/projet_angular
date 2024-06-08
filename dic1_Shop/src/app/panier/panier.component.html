@@ -12,41 +12,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of panierItems" class="articles">
+        <tr *ngFor="let item of panierItems">
           <td>
             <div class="produit_info">
-              <a (click)="deleteItem(item.article.id)">
-                <img src="../../assets/image/circle-xmark-regular.svg" alt="" class="xmark" >
+              <a (click)="deleteItem(item.id)">
+                <img src="assets/image/circle-xmark-regular.svg" alt="" class="xmark" id="cart">
               </a>
-              <img src="{{ item.article.image }}" alt="" class="produit_acheté">
-                <h5 class="modele">{{ item.article.modele }}</h5>
+              <img [src]="item.article_detail.image" [alt]="item.article_detail.modele" class="produit_acheté">
+              <span class="modele">{{ item.article_detail.modele }}</span>
             </div>
           </td>
-          <td>{{ item.article.prix }}$</td>
-
-
+          
+          <td>{{ item.article_detail.prix }}$</td>
           <td class="nb_produit2">
             <div>
-              <button class="moins" (click)="decrementQuantity(item)">-</button>
-              <input
-                type="number"
-                class="panier_nombre"
-                [(ngModel)]="item.nombre"
-                (change)="onQuantityChange()"
-                min="1"
-              />
-              <button class="plus" (click)="incrementQuantity(item)">+</button>
+              <button class="moins" (click)="decreaseQuantity(item)">-</button>
+              <input type="number" class="panier_nombre" name="nombre" [(ngModel)]="item.nombre" readonly>
+              <button class="plus" (click)="increaseQuantity(item)">+</button>
             </div>
           </td>
-
-
-          <td>{{ item.article.prix * item.nombre }}$</td>
+          <td class="total-column">{{ item.article_detail.prix * item.nombre }}$</td>
         </tr>
       </tbody>
     </table>
     <hr class="separateur3">
     <div class="btns">
-      <a class="btn_panier" [routerLink]="['/products']" routerLinkActive="router-link-active" >
+      <a class="btn_panier" [routerLink]="['/products']" routerLinkActive="router-link-active">
         <img src="assets/image/arrow-left-solid blue.svg" alt="" id="cart_arrow"> &nbsp; ACCUEIL
       </a>
       <a class="btn_panier" [routerLink]="['/validation']" routerLinkActive="router-link-active">VALIDER</a>

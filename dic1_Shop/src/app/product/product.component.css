@@ -4,3 +4,40 @@
 app-header1{
     width: 100%;
 }
+
+
+.cat2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    border: none;
+    /* border: 1px solid black; */
+    background-color: rgb(253, 101, 0);
+    align-content: center;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    flex: 1;
+    margin: 0 10px;
+
+}
+.cat2 p{
+    margin: 0;
+}.cat2 {
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .cat2:hover {
+    background-color: rgb(230, 92, 0); /* Changement de couleur de fond au survol */
+  }
+  
+  /* Animation au clic */
+  .cat2:active {
+    background-color: rgb(182, 73, 0);
+    transform: translateY(4px); /* Légère translation vers le bas au clic */
+  }

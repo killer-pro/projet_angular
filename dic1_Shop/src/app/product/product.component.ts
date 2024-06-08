@@ -5,12 +5,13 @@ import { Header1Component } from '../header1/header1.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { PanierService } from '../panier.service';
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [CommonModule,Header1Component,HttpClientModule,RouterLink],
-  providers:[ProductService],
+  providers:[ProductService,PanierService],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -23,6 +24,7 @@ export class ProductComponent implements OnInit,OnDestroy{
 
   constructor(
     private productService: ProductService,
+    private panierService: PanierService,
     private route: ActivatedRoute
   ){}
 
@@ -64,6 +66,21 @@ ngOnInit(): void {
     if (this.quantite > 1) {
       this.quantite--;
     }
+  }
+
+  ajouterAuPanier() {
+    const article = {
+      article: this.produit.id,
+      nombre: this.quantite
+    };
+    this.panierService.addItem(article).subscribe(
+      response => {
+        console.log('Article ajouté au panier avec succès : ', response);
+      },
+      error => {
+        console.error('Erreur lors de l\'ajout de l\'article au panier : ', error);
+      }
+    );
   }
 }
 
