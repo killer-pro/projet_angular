@@ -28,6 +28,11 @@ throw new Error('Method not implemented.');
     this.authService.getUser().subscribe({
       next: (data) => {
         this.user = data;
+        if (this.user.profile) {
+          this.user.profile = `http://127.0.0.1:8000${this.user.profile}`;
+        } else {
+          this.user.profile = 'assets/image/logo.png';
+        }
       },
       error: (err) => {
         // this.router.navigate(['/connexion']);

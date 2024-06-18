@@ -42,7 +42,7 @@
     </div>
     <div class="user-info">
       <a [routerLink]="['/info_compte']" routerLinkActive="router-link-active">
-        <img [src]="user.profile || 'assets/image/user.svg'" alt="Profile Picture" class="profile-picture">
+        <img [src]="user.profile" alt="Profile Picture" class="profile-picture">
         <span>{{ user.username }}</span>
       </a>
     </div>

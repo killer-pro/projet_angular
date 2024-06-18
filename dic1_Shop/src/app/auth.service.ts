@@ -50,14 +50,11 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/user/`, { headers });
   }
 
-  updateUser(user: any): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.put(`${this.apiUrl}/update/`, user, {headers
-      // headers: new HttpHeaders({
-      //   'Content-Type': 'application/json'
-      // })
-    });
+  updateUser(updatedData: FormData): Observable<any> {
+    const headers = this.getHeaders().delete('Content-Type'); // Remove 'Content-Type' header
+    return this.http.put(`${this.apiUrl}/update/`, updatedData, { headers });
   }
+  
 
   changePassword(data: any): Observable<any> {
     const headers = this.getHeaders();

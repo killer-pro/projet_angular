@@ -35,7 +35,7 @@ export class ParamCompteComponent implements OnInit {
       pays: [''],
       region: [''],
       code_postale: [''],
-      // profile: ['']
+      profile: ['']
     });
 
     this.passwordForm = this.fb.group({
@@ -53,7 +53,7 @@ export class ParamCompteComponent implements OnInit {
         this.initialUser = { ...data };
         this.userForm.patchValue(this.user);
         if (this.user.profile) {
-          this.profileImage = this.user.profile;
+          this.profileImage = `http://127.0.0.1:8000${this.user.profile}`;
         }
       },
       error: (err) => {
@@ -63,14 +63,20 @@ export class ParamCompteComponent implements OnInit {
   }
 
   onSubmitUserForm() {
-    const updatedData: any = {};
+    const updatedData = new FormData();
     Object.keys(this.userForm.controls).forEach(key => {
       const control = this.userForm.get(key);
       if (control) {
-        updatedData[key] = control.value;
+        updatedData.append(key, control.value);
       }
     });
-
+  
+    const fileInput = document.querySelector('input[type="file"]');
+    const file = (fileInput as HTMLInputElement).files?.[0];
+    if (file) {
+      updatedData.append('profile', file);
+    }
+  
     this.userService.updateUser(updatedData).subscribe({
       next: () => {
         console.log('User information updated successfully');
@@ -80,6 +86,7 @@ export class ParamCompteComponent implements OnInit {
       }
     });
   }
+  
 
   onSubmitPasswordForm() {
     this.userService.changePassword(this.passwordForm.value).subscribe({

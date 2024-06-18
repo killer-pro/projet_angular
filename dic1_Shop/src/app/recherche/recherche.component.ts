@@ -4,18 +4,18 @@ import { CategorieService } from '../categorie.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Header2Component } from '../header2/header2.component';
-import { RouterLink } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-recherche',
   standalone: true,
   providers: [ProductService, CategorieService],
-  imports: [CommonModule, HttpClientModule, Header2Component,RouterLink],
+  imports: [CommonModule, HttpClientModule, Header2Component, RouterLink],
   templateUrl: './recherche.component.html',
-  styleUrl: './recherche.component.css'
+  styleUrls: ['./recherche.component.css']
 })
-export class RechercheComponent implements OnInit{
+export class RechercheComponent implements OnInit {
   products: any[] = [];
   categories: any[] = [];
   selectedCategory: string = 'tous';
@@ -52,5 +52,9 @@ export class RechercheComponent implements OnInit{
 
   isProductVisible(produitCategorie: string): boolean {
     return this.selectedCategory === 'tous' || produitCategorie === this.selectedCategory;
+  }
+
+  noResultsFound(): boolean {
+    return this.products.length === 0;
   }
 }
