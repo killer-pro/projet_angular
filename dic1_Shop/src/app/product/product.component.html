@@ -1,5 +1,4 @@
-<!-- product.component.html -->
-<app-header1></app-header1>
+<app-header2></app-header2>
 <div class="header_bottom">
   <div class="center">
     <span><img src="assets/image/home.svg" alt=""></span>
@@ -37,7 +36,7 @@
         </div>
       </form>
       <p id="share">Partager le produit :
-        <!-- Share icons logic -->
+        <img src="../../assets/image/copy-regular.svg" alt="" id="cart"> <img src="../../assets/image/facebook.svg" alt="" id="cart"> <img src="../../assets/image/twitter.svg" alt="" id="cart"> <img src="../../assets/image/pinterest-p.svg" alt="" id="cart">
       </p>
       <div class="gar">
         <p>Garantie à 100% Paiement sécurisé</p>
@@ -66,5 +65,11 @@
       <p>Expédition terrestre UPS: 4 à 6 jours, 29.00$</p>
       <p>Exportation mondiale Unishop: 3 à 4 jours, 39.00$</p>
     </div>
+  </div>
+</div>
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close" (click)="showPopup = false">&times;</span>
+    <p>{{ popupMessage }}</p>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Header1Component } from '../header1/header1.component';
+import { first } from 'rxjs';
 
 
 @Component({
@@ -19,8 +20,8 @@ export class Iscription1Component {
   constructor(private fb: FormBuilder, private router: Router) {
     this.inscriptionForm = this.fb.group({
       username: ['', Validators.required],
-      prenom: ['', Validators.required],
-      nom: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       date_naissance: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });

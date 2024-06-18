@@ -3,7 +3,7 @@ import { PanierService, Article } from '../panier.service';
 import { Header2Component } from '../header2/header2.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-panier',
@@ -21,7 +21,12 @@ export class PanierComponent implements OnInit {
   taxe: number = 21.99;
   reduction: number = 0;
 
-  constructor(private panierService: PanierService) { }
+  constructor(
+    private panierService: PanierService,
+    private router: Router,
+    private route:ActivatedRoute,
+
+  ) { }
 
   ngOnInit(): void {
     this.loadPanierItems();
@@ -34,6 +39,7 @@ export class PanierComponent implements OnInit {
         this.calculateTotals();
       },
       error => {
+        this.router.navigate(['/connexion'], { queryParams: { returnUrl: this.route.snapshot.url.join('/'), loginRequired: true } });
         console.error('Erreur lors de la récupération du panier', error);
       }
     );

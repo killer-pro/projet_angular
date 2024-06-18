@@ -1,8 +1,7 @@
-// panier.service.ts
-
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface ArticleDetail {
   id: number;
@@ -28,6 +27,7 @@ export interface Article {
 })
 export class PanierService {
   private apiUrl = 'http://127.0.0.1:8000/panier/';
+  onAddItem: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private http: HttpClient) { }
 
@@ -48,9 +48,21 @@ export class PanierService {
     return this.http.get<Article[]>(this.apiUrl, { headers });
   }
 
+  getNombreProduitsDifferents(): Observable<number> {
+    const headers = this.getHeaders();
+    return this.http.get<Article[]>(this.apiUrl, { headers }).pipe(
+      map(items => items.length)
+    );
+  }
+
   addItem(article: { article: number; nombre: number }): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post(this.apiUrl, article, { headers });
+    return this.http.post(this.apiUrl, article, { headers }).pipe(
+      map(response => {
+        this.onAddItem.emit(); // Émettre l'événement d'ajout d'article
+        return response;
+      })
+    );
   }
 
   deleteItem(articleId: number): Observable<any> {

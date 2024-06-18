@@ -96,7 +96,7 @@ export class ParamCompteComponent implements OnInit {
     this.userService.logout().subscribe({
       next: () => {
         console.log('User logged out successfully');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/connexion']);
       },
       error: (err) => {
         console.error('Error logging out', err);

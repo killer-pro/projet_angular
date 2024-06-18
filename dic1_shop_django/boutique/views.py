@@ -41,11 +41,17 @@ def login(request):
 def test_token(request):
     return Response({'message': 'Token is valid'}, status=status.HTTP_200_OK)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def logout(request):
-    request.user.auth_token.delete()
-    return Response(status=status.HTTP_200_OK)
+    try:
+        # Supprimer le token de l'utilisateur
+        request.user.auth_token.delete()
+        return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
+    except Token.DoesNotExist:
+        return Response({"error": "Token not found"}, status=status.HTTP_400_BAD_REQUEST)
+    
 
 @api_view(['GET', 'PUT', 'PATCH'])
 @permission_classes([IsAuthenticated])

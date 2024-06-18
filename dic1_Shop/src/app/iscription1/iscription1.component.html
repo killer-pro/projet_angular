@@ -25,13 +25,13 @@
         </div>
 
         <label for="prenom">Prénom</label>
-        <input formControlName="prenom" id="prenom" type="text" />
+        <input formControlName="first_name" id="prenom" type="text" />
         <div *ngIf="prenom && prenom.invalid && prenom.touched">
           <small *ngIf="prenom.hasError('required')">Prénom est requis</small>
         </div>
 
         <label for="nom">Nom</label>
-        <input formControlName="nom" id="nom" type="text" />
+        <input formControlName="last_name" id="nom" type="text" />
         <div *ngIf="nom && nom.invalid && nom.touched">
           <small *ngIf="nom.hasError('required')">Nom est requis</small>
         </div>

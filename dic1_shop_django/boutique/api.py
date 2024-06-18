@@ -1,6 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics,status
 from .models import Produit, Categorie,Articles
-from .serializer import ProduitSerializer, CategorieSerializer,ArticlesSerializer
+from .serializer import ProduitSerializer, CategorieSerializer,ArticlesSerializer,ChangePasswordSerializer
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -55,3 +55,17 @@ class RechercheView(generics.ListAPIView):
                     Q(description__icontains=terme_recherche) |
                     Q(categorie__icontains=terme_recherche)
                 )
+
+
+
+
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer = ChangePasswordSerializer(data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.update(request.user, serializer.validated_data)
+            return Response({"detail": "Password has been changed successfully"}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

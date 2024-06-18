@@ -1,41 +1,47 @@
 <app-header1></app-header1>
 <div class="header_bottom">
-    <div class="center">
-      <span><img src="assets/image/home.svg" alt=""></span>
-      <span><a routerLink="/">acceuil</a></span>
-      <span>></span>
-      <span class="page">connexion</span>
+  <div class="center">
+    <span><img src="assets/image/home.svg" alt=""></span>
+    <span><a routerLink="/">Accueil</a></span>
+    <span>></span>
+    <span class="page">Connexion</span>
+  </div>
+</div>
+
+<div class="corps connexion">
+  <div class="log">
+    <div class="head">
+      <div class="active">Connexion</div>
+      <div><a routerLink="/inscription1">Inscription</a></div>
+    </div>
+    <div class="form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email</label>
+        <input formControlName="email" id="email" type="email" />
+        <div *ngIf="email && email.invalid && email.touched">
+          <small *ngIf="email.hasError('required')">Email est requis</small>
+          <small *ngIf="email.hasError('email')">Format de l'email invalide</small>
+        </div>
+
+        <label for="password">Mot de passe</label>
+        <input formControlName="password" id="password" type="password" />
+        <div *ngIf="password && password.invalid && password.touched">
+          <small *ngIf="password.hasError('required')">Mot de passe est requis</small>
+        </div>
+
+        <div *ngIf="error">
+          <small>{{ error }}</small>
+        </div>
+
+        <button class="valider" type="submit" [disabled]="loginForm.invalid">Suivant</button>
+      </form>
     </div>
   </div>
-  
-  <div class="corps connexion">
-    <div class="log">
-      <div class="head">
-        <div class="active">Connexion</div>
-        <div><a routerLink="/inscription1">Inscription</a></div>
-      </div>
-      <div class="form">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <label for="email">Email</label>
-          <input formControlName="email" id="email" type="email" />
-          <div *ngIf="email && email.invalid && email.touched">
-            <small *ngIf="email.hasError('required')">Email is required</small>
-            <small *ngIf="email.hasError('email')">Invalid email format</small>
-          </div>
-  
-          <label for="password">Password</label>
-          <input formControlName="password" id="password" type="password" />
-          <div *ngIf="password && password.invalid && password.touched">
-            <small *ngIf="password.hasError('required')">Password is required</small>
-          </div>
-  
-          <div *ngIf="error">
-            <small>{{ error }}</small>
-          </div>
-  
-          <button class="valider" type="submit" [disabled]="loginForm.invalid">Suivant</button>
-        </form>
-      </div>
-    </div>
+</div>
+
+<div *ngIf="loginRequired" class="popup">
+  <div class="popup-content">
+    <p>Vous devez d'abord vous connecter pour accéder à cette page.</p>
+    <button (click)="loginRequired = false">OK</button>
   </div>
-  
+</div>

@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Header2Component } from '../header2/header2.component';
 
@@ -18,7 +18,11 @@ throw new Error('Method not implemented.');
 }
   user: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route:ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe({
@@ -26,6 +30,8 @@ throw new Error('Method not implemented.');
         this.user = data;
       },
       error: (err) => {
+        // this.router.navigate(['/connexion']);
+        this.router.navigate(['/connexion'], { queryParams: { returnUrl: this.route.snapshot.url.join('/'), loginRequired: true } });
         console.error('Error fetching user data', err);
       }
     });

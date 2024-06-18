@@ -2,48 +2,60 @@
 <div class="parties2">
   <section class="liste_produits">
     <h5 id="title">Panier</h5>
-    <table id="panier-table">
-      <thead>
-        <tr>
-          <th class="intitulés">PRODUIT</th>
-          <th class="intitulés">PRIX</th>
-          <th class="intitulés">QUANTITÉ</th>
-          <th class="intitulés">TOTAL</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of panierItems">
-          <td>
-            <div class="produit_info">
-              <a (click)="deleteItem(item.id)">
-                <img src="assets/image/circle-xmark-regular.svg" alt="" class="xmark" id="cart">
-              </a>
-              <img [src]="item.article_detail.image" [alt]="item.article_detail.modele" class="produit_acheté">
-              <span class="modele">{{ item.article_detail.modele }}</span>
-            </div>
-          </td>
-          
-          <td>{{ item.article_detail.prix }}$</td>
-          <td class="nb_produit2">
-            <div>
-              <button class="moins" (click)="decreaseQuantity(item)">-</button>
-              <input type="number" class="panier_nombre" name="nombre" [(ngModel)]="item.nombre" readonly>
-              <button class="plus" (click)="increaseQuantity(item)">+</button>
-            </div>
-          </td>
-          <td class="total-column">{{ item.article_detail.prix * item.nombre }}$</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr class="separateur3">
-    <div class="btns">
+
+    <!-- Afficher un message si le panier est vide -->
+    <div *ngIf="panierItems.length === 0" class="panier-vide">
+      <p>Votre panier est vide.</p>
       <a class="btn_panier" [routerLink]="['/products']" routerLinkActive="router-link-active">
-        <img src="assets/image/arrow-left-solid blue.svg" alt="" id="cart_arrow"> &nbsp; ACCUEIL
+        <img src="assets/image/arrow-left-solid blue.svg" alt="" id="cart_arrow"> &nbsp; CONTINUER VOS ACHATS
       </a>
-      <a class="btn_panier" [routerLink]="['/validation']" routerLinkActive="router-link-active">VALIDER</a>
+    </div>
+
+    <!-- Afficher le tableau des articles si le panier n'est pas vide -->
+    <div *ngIf="panierItems.length > 0">
+      <table id="panier-table">
+        <thead>
+          <tr>
+            <th class="intitulés">PRODUIT</th>
+            <th class="intitulés">PRIX</th>
+            <th class="intitulés">QUANTITÉ</th>
+            <th class="intitulés">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of panierItems">
+            <td>
+              <div class="produit_info">
+                <a (click)="deleteItem(item.id)">
+                  <img src="assets/image/circle-xmark-regular.svg" alt="" class="xmark" id="cart">
+                </a>
+                <img [src]="item.article_detail.image" [alt]="item.article_detail.modele" class="produit_acheté">
+                <span class="modele">{{ item.article_detail.modele }}</span>
+              </div>
+            </td>
+            <td>{{ item.article_detail.prix }}$</td>
+            <td class="nb_produit2">
+              <div>
+                <button class="moins" (click)="decreaseQuantity(item)">-</button>
+                <input type="number" class="panier_nombre" name="nombre" [(ngModel)]="item.nombre" readonly>
+                <button class="plus" (click)="increaseQuantity(item)">+</button>
+              </div>
+            </td>
+            <td class="total-column">{{ item.article_detail.prix * item.nombre }}$</td>
+          </tr>
+        </tbody>
+      </table>
+      <hr class="separateur3">
+      <div class="btns">
+        <a class="btn_panier" [routerLink]="['/products']" routerLinkActive="router-link-active">
+          <img src="assets/image/arrow-left-solid blue.svg" alt="" id="cart_arrow"> &nbsp; ACCUEIL
+        </a>
+        <a class="btn_panier" [routerLink]="['/validation']" routerLinkActive="router-link-active">VALIDER</a>
+      </div>
     </div>
   </section>
-  <section class="total">
+  
+  <section class="total" *ngIf="panierItems.length > 0">
     <p id="title">Totaux</p>
     <table>
       <tbody>

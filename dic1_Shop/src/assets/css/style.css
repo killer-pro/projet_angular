@@ -549,7 +549,15 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.produit:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
 
 .images_articles {
     max-width: 100%; 

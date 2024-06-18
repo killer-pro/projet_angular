@@ -27,17 +27,49 @@ app-header1{
 }.cat2 {
     text-decoration: none;
     font-size: 16px;
+    height: 100%;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
   }
   
   .cat2:hover {
-    background-color: rgb(230, 92, 0); /* Changement de couleur de fond au survol */
+    background-color: rgb(230, 92, 0);
   }
   
   /* Animation au clic */
   .cat2:active {
     background-color: rgb(182, 73, 0);
-    transform: translateY(4px); /* Légère translation vers le bas au clic */
+    transform: translateY(4px);
   }
+
+  .popup {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #e4e4e4;
+    color: rgb(230, 92, 0);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    z-index: 1000;
+    animation: fadeIn 0.5s;
+  }
+  
+  .popup-content {
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  

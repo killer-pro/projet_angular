@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService,Produit } from '../product.service';
-import { Header1Component } from '../header1/header1.component';
+import { Header2Component } from '../header2/header2.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { PanierService } from '../panier.service';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule,Header1Component,HttpClientModule,RouterLink],
+  imports: [CommonModule,Header2Component,HttpClientModule,RouterLink],
   providers:[ProductService,PanierService],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
@@ -18,6 +18,8 @@ import { PanierService } from '../panier.service';
 export class ProductComponent implements OnInit,OnDestroy{
   produit: any;
   quantite: number = 1;
+  showPopup: boolean = false;
+  popupMessage: string = '';
 
   private routeSub: Subscription | undefined;
   private productSub: Subscription | undefined;
@@ -76,6 +78,11 @@ ngOnInit(): void {
     this.panierService.addItem(article).subscribe(
       response => {
         console.log('Article ajouté au panier avec succès : ', response);
+        this.popupMessage = `${this.quantite} x ${this.produit.modele} ajouté(s) au panier.`;
+        this.showPopup = true;
+        setTimeout(() => {
+          this.showPopup = false;
+        }, 3000); // Cachez le popup après 3 secondes
       },
       error => {
         console.error('Erreur lors de l\'ajout de l\'article au panier : ', error);

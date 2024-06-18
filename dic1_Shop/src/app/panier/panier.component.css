@@ -4,4 +4,30 @@
 .quantite{
     width: 50px;
 }
+
+
+
+.panier-vide {
+    text-align: center;
+    margin-top: 20px;
+}
+  
+  .panier-vide p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .panier-vide .btn_panier {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .panier-vide .btn_panier:hover {
+    background-color: #0056b3;
+  }
   
