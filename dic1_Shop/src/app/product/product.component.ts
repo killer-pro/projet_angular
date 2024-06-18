@@ -1,25 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ProductService,Produit } from '../product.service';
+import { ProductService, Produit } from '../product.service';
 import { Header2Component } from '../header2/header2.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { PanierService } from '../panier.service';
+import { CommunicationService } from '../communcation.service';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule,Header2Component,HttpClientModule,RouterLink],
-  providers:[ProductService,PanierService],
+  imports: [CommonModule, Header2Component, HttpClientModule, RouterLink],
+  providers: [ProductService, PanierService, CommunicationService],
   templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit,OnDestroy{
+export class ProductComponent implements OnInit, OnDestroy {
   produit: any;
   quantite: number = 1;
   showPopup: boolean = false;
   popupMessage: string = '';
+  nombreProduitsDifferents: number = 0; // Nombre de produits différents
 
   private routeSub: Subscription | undefined;
   private productSub: Subscription | undefined;
@@ -27,15 +29,25 @@ export class ProductComponent implements OnInit,OnDestroy{
   constructor(
     private productService: ProductService,
     private panierService: PanierService,
-    private route: ActivatedRoute
-  ){}
+    private route: ActivatedRoute,
+    private communicationService: CommunicationService
+  ) {}
 
-
-ngOnInit(): void {
+  ngOnInit(): void {
     this.routeSub = this.route.paramMap.subscribe(params => {
       const id = +params.get('id')!;
       if (id) {
         this.loadProduct(id);
+      }
+    });
+
+    // Initialiser le nombre de produits différents
+    this.panierService.getNombreProduitsDifferents().subscribe({
+      next: (count) => {
+        this.nombreProduitsDifferents = count;
+      },
+      error: (err) => {
+        console.error('Error fetching number of different products in panier', err);
       }
     });
   }
@@ -49,7 +61,7 @@ ngOnInit(): void {
       this.produit = this.produit[0];
     });
   }
-  
+
   ngOnDestroy(): void {
     if (this.routeSub) {
       this.routeSub.unsubscribe();
@@ -59,7 +71,6 @@ ngOnInit(): void {
     }
   }
 
-  
   incrementQuantity() {
     this.quantite++;
   }
@@ -82,7 +93,20 @@ ngOnInit(): void {
         this.showPopup = true;
         setTimeout(() => {
           this.showPopup = false;
-        }, 3000); // Cachez le popup après 3 secondes
+        }, 3000);
+
+        // Mettre à jour le nombre de produits différents
+        this.panierService.getNombreProduitsDifferents().subscribe({
+          next: (count) => {
+            this.nombreProduitsDifferents = count;
+          },
+          error: (err) => {
+            console.error('Error fetching number of different products in panier', err);
+          }
+        });
+
+        // Envoyer la notification pour rafraîchir le header
+        this.communicationService.updateHeader();
       },
       error => {
         console.error('Erreur lors de l\'ajout de l\'article au panier : ', error);
@@ -90,4 +114,3 @@ ngOnInit(): void {
     );
   }
 }
-

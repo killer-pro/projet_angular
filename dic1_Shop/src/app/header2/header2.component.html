@@ -1,51 +1,50 @@
 <nav>
-    <div id="nav_top">
-      <p>Bienvenue dans la boutique de commerce électronique en ligne DIC1 shop.</p>
-      <div id="nav_top_right">
-        <div>
-          <span>Suivez nous:</span>
-          <img src="assets/image/social.png" alt="social" class="social">
-        </div>
-        <div class="hr"></div>
-        <div id="selection">
-          <select name="lang" id="lang">
-            <option value="fra">fra</option>
-            <option value="eng">eng</option>
-          </select>
-          <select name="devise" id="devise">
-            <option value="USD">USD</option>
-            <option value="FRANC">Francs Cfa</option>
-          </select>
-        </div>
+  <div id="nav_top">
+    <p>Bienvenue dans la boutique de commerce électronique en ligne DIC1 shop.</p>
+    <div id="nav_top_right">
+      <div>
+        <span>Suivez nous:</span>
+        <img src="assets/image/social.png" alt="social" class="social">
+      </div>
+      <div class="hr"></div>
+      <div id="selection">
+        <select name="lang" id="lang">
+          <option value="fra">fra</option>
+          <option value="eng">eng</option>
+        </select>
+        <select name="devise" id="devise">
+          <option value="USD">USD</option>
+          <option value="FRANC">Francs Cfa</option>
+        </select>
       </div>
     </div>
-    <div id="nav_bottom">
-      <div class="icone">
-        <a [routerLink]="['/products']" routerLinkActive="router-link-active">
-          <img src="assets/image/logo.png" alt="">
-          <span>BOUTIQUE DIC1</span>
-        </a>
-      </div>
-      <div class="search-container">
-        <form>
-          <input type="text" name="q" placeholder="Rechercher..." [(ngModel)]="searchTerm">
-          <button type="submit" class="icone search" [routerLink]="'/recherche/' + searchTerm">
-            <img src="assets/image/loupe.png" alt="Rechercher">
-          </button>
-        </form>
-      </div>
-      <div class="panier-container">
-        <a [routerLink]="['/panier']" routerLinkActive="router-link-active">
-          <img src="assets/image/achat.svg" alt="">
-          <div class="badge" *ngIf="nombreProduitsDifferents > 0">{{ nombreProduitsDifferents }}</div>
-        </a>
-      </div>
-      <div class="user-info">
-        <a [routerLink]="['/info_compte']" routerLinkActive="router-link-active">
-          <img [src]="user.profile || 'assets/image/user.svg'" alt="Profile Picture" class="profile-picture">
-          <span>{{ user.username }}</span>
-        </a>
-      </div>
+  </div>
+  <div id="nav_bottom">
+    <div class="icone">
+      <a [routerLink]="['/products']" routerLinkActive="router-link-active">
+        <img src="assets/image/logo.png" alt="">
+        <span>BOUTIQUE DIC1</span>
+      </a>
     </div>
-  </nav>
-  
+    <div class="search-container">
+      <form>
+        <input type="text" name="q" placeholder="Rechercher..." [(ngModel)]="searchTerm">
+        <button type="submit" class="icone search" [routerLink]="'/recherche/' + searchTerm">
+          <img src="assets/image/loupe.png" alt="Rechercher">
+        </button>
+      </form>
+    </div>
+    <div class="panier-container">
+      <a [routerLink]="['/panier']" routerLinkActive="router-link-active">
+        <img src="assets/image/achat.svg" alt="">
+        <div class="badge" *ngIf="nombreProduitsDifferents > 0">{{ nombreProduitsDifferents }}</div>
+      </a>
+    </div>
+    <div class="user-info">
+      <a [routerLink]="['/info_compte']" routerLinkActive="router-link-active">
+        <img [src]="user.profile || 'assets/image/user.svg'" alt="Profile Picture" class="profile-picture">
+        <span>{{ user.username }}</span>
+      </a>
+    </div>
+  </div>
+</nav>

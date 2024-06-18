@@ -59,14 +59,20 @@ export class PanierService {
     const headers = this.getHeaders();
     return this.http.post(this.apiUrl, article, { headers }).pipe(
       map(response => {
-        this.onAddItem.emit(); // Émettre l'événement d'ajout d'article
+        this.onAddItem.emit();
         return response;
       })
     );
   }
 
+
   deleteItem(articleId: number): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.delete(`${this.apiUrl}${articleId}/`, { headers });
+    return this.http.delete(`${this.apiUrl}${articleId}/`, { headers }).pipe(
+      map(response => {
+        this.onAddItem.emit();
+        return response;
+      })
+    );
   }
 }
